@@ -5,7 +5,7 @@
 [![Coverage](https://codecov.io/gh/anmol1104/TA.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/anmol1104/TA.jl)
 
 ```julia
-assigntraffic(; network, assignment=:UE, tol=1e-5, maxiters=20, maxruntime=300, log=:off)
+assigntraffic(; method, network, assignment=:UE, tol=1e-5, maxiters=20, maxruntime=300, log=:off)
 ```
 
 Traffic Assignment
