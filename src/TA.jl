@@ -14,6 +14,6 @@ include("djk.jl")
 include("trafficassignment.jl")
 include("visualize.jl")
 
-export assigntraffic, visualize
+export assigntraffic
 
 end
