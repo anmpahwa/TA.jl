@@ -8,8 +8,6 @@
 assigntraffic(; method, network, assignment=:UE, tol=1e-5, maxiters=20, maxruntime=300, log=:off)
 ```
 
-Traffic Assignment
-
 ## Returns
 a named tuple with keys `:metadata`, `:report`, and `:output`
 - `metadata::String`  : Text defining the traffic assignment run 
