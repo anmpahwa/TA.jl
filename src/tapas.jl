@@ -1,7 +1,7 @@
 include("mcs.jl")
 
 """
-    tapas(G::Graph, tol::Float64, maxiters::Int64, maxruntime::Int64, log::Symbol)
+    tapas(G::Graph, tol, maxiters, maxruntime, log::Symbol)
 
 Paired Alternative Segments algorithm for static single-class traffic assignment problem with generalized link cost function.
 
@@ -18,12 +18,11 @@ a named tuple with keys `:metadata`, `:report`, and `:output`
 - `maxruntime::Int64`   : Maximum algorithm run time (seconds)
 - `log::Symbol`         : Log iterations (one of `:off`, `:on`)
 """
-function tapas(G::Graph, tol::Float64, maxiters::Int64, maxruntime::Int64, log::Symbol)
+function tapas(G::Graph, tol, maxiters, maxruntime, log::Symbol)
     report   = DataFrame(LOG₁₀RG = Float64[], TF = Float64[], TC = Float64[], RT = Float64[])
     solution = DataFrame(FROM = Int64[], TO = Int64[], FLOW = Float64[], COST = Float64[])
     
-    N, A, K, O = G.N, G.A, G.K, G.O                                         # Graph
-    R  = getproperty.(O, :n)                                                # Origin nodes
+    A, O = G.N, G.A, G.K, G.O                                               # Graph
     P  = PAS[]                                                              # PASs
     
     if isequal(log, :on)
@@ -134,7 +133,8 @@ function tapas(G::Graph, tol::Float64, maxiters::Int64, maxruntime::Int64, log::
         push!(solution, z) 
     end
 
-    assignment = A[begin].ϕ ? :UE : :SO
+    φ = ϕ::Bool
+    assignment = φ ? :UE : :SO
     
     metadata = "MetaData
     Network     => $(G.name)

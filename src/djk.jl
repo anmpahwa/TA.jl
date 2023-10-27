@@ -168,5 +168,4 @@ function path(G::Graph, r::Node, s::Node, L::Vector{Int64})
 end
 path(G::Graph, r::Node, d::Destination)   = path(G::Graph, d.L, r, d.n)
 path(G::Graph, o::Origin, s::Node)        = path(G::Graph, o.L, o.n, s)
-path(G::Graph, o::Origin, d::Destination) = path(G::Graph, d.L, o.n, d.n)
 path(G::Graph, o::Origin, d::Destination) = path(G::Graph, o.L, o.n, d.n)

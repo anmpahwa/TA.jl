@@ -38,12 +38,12 @@ function ispotential(a::Arc, o::Origin, G::Graph)
 end
 
 """
-    𝝳(p::PAS, λ::Float64)
+    𝝳(p::PAS, λ)
 
 Evaluates amount of flow `δ` to shift on pas `p`.
 If `δ` is less than the threshold limit of `λ` then `δ` is assumed to be zero.
 """
-function 𝝳(p::PAS, λ::Float64)
+function 𝝳(p::PAS, λ)
     e₁, e₂, o = p.e₁, p.e₂, p.o
     
     f₁, f₂   = fₑ(e₁, o), fₑ(e₂, o)
@@ -62,11 +62,11 @@ function 𝝳(p::PAS, λ::Float64)
 end
 
 """
-    shift(p::PAS, δ::Float64)
+    shift(p::PAS, δ)
 
 Shifts flow `δ` on pas `p`.
 """
-function shift(p::PAS, δ::Float64)
+function shift(p::PAS, δ)
     e₁, e₂, o = p.e₁, p.e₂, p.o
     k = o.k
     

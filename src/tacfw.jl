@@ -1,5 +1,5 @@
 """
-    tacfw(G::Graph, tol::Float64, maxiters::Int64, maxruntime::Int64, log::Symbol)
+    tacfw(G::Graph, tol, maxiters, maxruntime, log::Symbol)
 
 Conjugate Frank-Wolfe method for static multi-class traffic assignment problem with generalized link cost function.
 
@@ -16,12 +16,11 @@ a named tuple with keys `:metadata`, `:report`, and `:output`
 - `maxruntime::Int64`   : Maximum algorithm run time (seconds)
 - `log::Symbol`         : Log iterations (one of `:off`, `:on`)
 """
-function tacfw(G::Graph, tol::Float64, maxiters::Int64, maxruntime::Int64, log::Symbol)
+function tacfw(G::Graph, tol, maxiters, maxruntime, log::Symbol)
     report   = DataFrame(LOG₁₀RG = Float64[], TF = Float64[], TC = Float64[], RT = Float64[])
     solution = DataFrame(FROM = Int64[], TO = Int64[], FLOW = Float64[], COST = Float64[])
 
-    N, A, K, O = G.N, G.A, G.K, G.O                                         # Graph  
-    R  = [o.n for o ∈ O]                                                    # Origin nodes
+    A, K, O = G.N, G.A, G.K, G.O                                            # Graph  
     y  = zeros(length(A))                                                   # Auxiliary arc flow
     p  = zeros(length(A))                                                   # Point of sight
     d  = zeros(length(A))                                                   # Search direction
@@ -156,7 +155,8 @@ function tacfw(G::Graph, tol::Float64, maxiters::Int64, maxruntime::Int64, log::
         push!(solution, z) 
     end
 
-    assignment = A[begin].ϕ ? :UE : :SO
+    φ = ϕ::Bool
+    assignment = φ ? :UE : :SO
 
     metadata =  "MetaData
     Network     => $(G.name)
