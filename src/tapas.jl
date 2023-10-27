@@ -22,7 +22,7 @@ function tapas(G::Graph, tol, maxiters, maxruntime, log::Symbol)
     report   = DataFrame(LOG₁₀RG = Float64[], TF = Float64[], TC = Float64[], RT = Float64[])
     solution = DataFrame(FROM = Int64[], TO = Int64[], FLOW = Float64[], COST = Float64[])
     
-    A, O = G.N, G.A, G.K, G.O                                               # Graph
+    A, O = G.A, G.O                                                         # Graph
     P  = PAS[]                                                              # PASs
     
     if isequal(log, :on)

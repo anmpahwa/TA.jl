@@ -20,7 +20,7 @@ function taffw(G::Graph, tol, maxiters, maxruntime, log::Symbol)
     report   = DataFrame(LOG₁₀RG = Float64[], TF = Float64[], TC = Float64[], RT = Float64[])
     solution = DataFrame(FROM = Int64[], TO = Int64[], FLOW = Float64[], COST = Float64[])
 
-    A, K, O = G.N, G.A, G.K, G.O                                            # Graph  
+    A, K, O = G.A, G.K, G.O                                                 # Graph  
     y  = zeros(length(A))                                                   # Auxiliary arc flow
     p  = zeros(length(A))                                                   # Point of sight
     d  = zeros(length(A))                                                   # Search direction
