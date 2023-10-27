@@ -121,8 +121,9 @@ function taffw(G::Graph, tol, maxiters, maxruntime, log::Symbol)
         while abs(u-l) ≥ ε
             v = 0.
             for (k,a) ∈ enumerate(A) 
-                x = a.x + α * d[k]
-                v += cₐ(a, x) * d[k] 
+                a.x += α * d[k]
+                v += cₐ(a) * d[k]
+                a.x -= α * d[k]
             end            
             if v < 0. l = α
             elseif v > 0. u = α

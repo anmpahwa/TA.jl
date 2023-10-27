@@ -1,14 +1,16 @@
 """
-    cₐ(a::Arc, x=a.x)
+    cₐ(a::Arc)
 
-Returns arc cost for arc `a` for arc flow `x`
+Returns arc cost for arc `a`
 """
-function cₐ(a::Arc, x=a.x)
+function cₐ(a::Arc)
     φ = ϕ::Bool
+
+    v = a.v
     tₒ= a.tₒ
     α = a.α
     β = a.β
-    v = a.v
+    x = a.x
 
     t = tₒ * (1 + α * (x/v) ^ β)
     t′= iszero(φ) || iszero(β) ? 0. : tₒ * α * β * (x ^ (β - 1))/(v ^ β)
@@ -30,16 +32,18 @@ function cₑ(e::Vector{Arc})
 end
 
 """
-    cₐ′(a::Arc, x=a.x)
+    cₐ′(a::Arc)
 
-Returns first derivative of arc cost wrt arc flow for arc `a` at arc flow `x`
+Returns first derivative of arc cost wrt arc flow for arc `a`
 """
-function cₐ′(a::Arc, x=a.x)
+function cₐ′(a::Arc)
     φ = ϕ::Bool
+
+    v = a.v
     tₒ= a.tₒ
     α = a.α
     β = a.β
-    v = a.v
+    x = a.x
 
     t′= iszero(β) ? 0. : tₒ * α * β * (x ^ (β - 1))/(v ^ β)
     t″ = iszero(φ) || iszero(β) || isone(β) ?  0. : tₒ * α * β * (β - 1) * (x ^ (β - 2))/(v ^ β)
