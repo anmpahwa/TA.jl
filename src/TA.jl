@@ -7,6 +7,8 @@ using Printf
 using StatsBase
 using DataFrames
 
+global ϕ = false::Bool
+
 include("datastructure.jl")
 include("build.jl")
 include("cost.jl")

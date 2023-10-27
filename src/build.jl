@@ -4,7 +4,7 @@
 Returns network as a graph with nodes, arcs, and relevant properties, for `:UE` or `:SO` assignment
 """
 function build(network, assignment)
-    ϕ = assignment == :UE ? false : true
+    global ϕ = !isequal(assignment, :UE)
 
     # csv files
     df₁ = DataFrame(CSV.File(joinpath(dirname(@__DIR__), "network/$network/network.csv"), types=[Int64, Int64, Float64, Float64, Float64, Float64, Float64]))
@@ -38,7 +38,7 @@ function build(network, assignment)
         tₒ= df₁[k,5]
         α = df₁[k,6]
         β = df₁[k,7]
-        a = Arc(t, h, v, d, tₒ, α, β, 0., copy(Xʳ), 0., 0., ϕ)
+        a = Arc(t, h, v, d, tₒ, α, β, 0., copy(Xʳ), 0., 0.)
         A[k] = a
     end
 
